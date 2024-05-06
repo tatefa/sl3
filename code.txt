@@ -1,0 +1,99 @@
+import pandas as pd
+import numpy as num
+import matplotlib.pyplot as plt
+from sklearn.model_selection import train_test_split
+from sklearn.metrics import mean_squared_error
+
+df=pd.read_csv("/content/house1.zip")
+
+df.head()
+
+df.shape
+
+df.info()
+df=df.dropna()
+df.isnull().sum()
+
+x=df.drop(["medv"],axis=1)
+y = df['medv']
+
+x
+
+y
+
+x_train, x_test, y_train, y_test = train_test_split(x, y ,test_size = 0.2,␣
+↪random_state=0)
+
+from sklearn.linear_model import LinearRegression
+regressor = LinearRegression()
+
+regressor.fit(x_train, y_train)
+
+y_pred = regressor.predict(x_test)
+
+from sklearn.metrics import mean_squared_error, mean_absolute_error
+mse = mean_squared_error(y_test, y_pred)
+mae = mean_absolute_error(y_test,y_pred)
+print("Mean Square Error : ", mse)
+print("Mean Absolute Error : ", mae)
+
+print(mean_absolute_error(y_test, y_pred))
+print(mean_squared_error(y_test, y_pred))
+print(num.sqrt(mse))
+
+plt.scatter(y_test, y_pred, c = 'green')
+plt.xlabel("Price: in $1000's")
+plt.ylabel("Predicted value")
+plt.title("True value vs predicted value : Linear Regression")
+plt.show()
+
+
+
+
+
+
+
+
+Explanation :
+
+
+pandas (pd): Pandas is a powerful data manipulation and analysis library in Python. It provides data structures and functions to efficiently manipulate large datasets.
+
+numpy (np): NumPy is a fundamental package for numerical computing in Python. It provides support for large, multi-dimensional arrays and matrices, along with a collection of mathematical functions to operate on these arrays.
+
+matplotlib.pyplot (plt): Matplotlib is a comprehensive library for creating static, interactive, and animated visualizations in Python. The pyplot module provides a MATLAB-like interface for creating plots and visualizations.
+
+sklearn.model_selection.train_test_split: This function splits arrays or matrices into random train and test subsets. It is commonly used for splitting datasets into training and testing sets for machine learning tasks.
+sklearn.metrics.mean_squared_error: This function calculates the mean squared error (MSE) between the true and predicted values. It is a measure of the average squared difference between the predicted and true values.
+sklearn.metrics.mean_absolute_error: This function calculates the mean absolute error (MAE) between the true and predicted values. It is a measure of the average absolute difference between the predicted and true values.
+sklearn.linear_model.LinearRegression: This class implements ordinary least squares linear regression. It fits a linear model with coefficients to minimize the residual sum of squares between the observed and predicted target values.
+
+pd.read_csv(): This function reads a CSV (Comma Separated Values) file into a DataFrame. It allows loading data from a CSV file into a DataFrame for further analysis.
+
+DataFrame.head(): This method returns the first n rows of the DataFrame. It is useful for quickly examining the structure and contents of the DataFrame.
+
+DataFrame.shape: This attribute returns a tuple representing the dimensions of the DataFrame. It provides information about the number of rows and columns in the DataFrame.
+
+DataFrame.info(): This method provides a concise summary of the DataFrame, including information about the data types, non-null values, and memory usage. It is useful for understanding the structure and composition of the DataFrame.
+
+DataFrame.dropna(): This method removes rows with missing values (NaN) from the DataFrame. It is used to clean the data by eliminating incomplete observations.
+
+DataFrame.isnull(): This method returns a DataFrame of Boolean values indicating whether each element is missing (NaN) or not.
+Series.sum(): This method returns the sum of the values in a Series. It is used to count the number of missing values in each column of the DataFrame.
+
+DataFrame.drop(): This method removes specified rows or columns from the DataFrame. It is used to separate the features (independent variables) and the target variable (dependent variable) from the DataFrame.
+
+train_test_split(): This function splits the dataset into random train and test subsets. It allows partitioning the data into training and testing sets for model evaluation.
+
+LinearRegression.fit(): This method fits a linear regression model to the training data. It estimates the coefficients of the linear regression equation using the least squares method.
+
+LinearRegression.predict(): This method makes predictions on new data using the fitted linear regression model. It predicts the target variable values for the test features.
+
+mean_squared_error(): This function calculates the mean squared error between the true and predicted values. It quantifies the average squared difference between the actual and predicted values.
+mean_absolute_error(): This function calculates the mean absolute error between the true and predicted values. It measures the average absolute difference between the actual and predicted values.
+
+plt.scatter(): This function creates a scatter plot of two variables. It is used to visualize the relationship between the true and predicted values of the target variable.
+plt.xlabel(): This function sets the label for the x-axis in the plot.
+plt.ylabel(): This function sets the label for the y-axis in the plot.
+plt.title(): This function sets the title of the plot.
+plt.show(): This function displays the plot. It is used to show the scatter plot of true vs predicted values.
